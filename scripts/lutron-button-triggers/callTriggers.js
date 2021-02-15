@@ -7,15 +7,15 @@ const config = require('./config');
 //
 //  This is just an example of a house with 4 airplays, 4 music streams (rca from an MMS5A) and 2 xm radios as pure audio sources.
 //  The switch case is triggered depending on the json config of the buttons pressed. Services can be accessed in a round robin config
-//  depending how often a button is pressed. Also direct dials to all configs is possible with simple shortcodes like '1' or 'A'. 
+//  depending how often a button is pressed. Also direct dials to all services are possible with simple shortcodes like '1' or 'A' that I chose. 
 //  The off command grabs the current running video or audio service and shuts it down. The volume commands check periodically if
-//  the button is still pressed and invokes the commands again after set times in a manner of 'press and hold'.
+//  the button is still pressed and invoke the commands again after a set times in a manner of 'press and hold'.
 //  Any logic or combination is possible in the Savant sclibridge and additinal variables can be created on the system host that can be
 //  shared between the Blueprint configuration and scripts running elsewhere on the host. I would be excited to see what other integrators
 //  can create with this approach.
 //
 //  An additional last case I just added, is the ability to call scenes from the buttons. Just have a look at the json to see how the
-//  fields have to be filled out.
+//  fields have to be filled out. The scenes are called in the last step of the switch case.
 //
 //  To retrieve scene information just run 'sclibridge getSceneNames' in the terminal on your host.
 //  To retrieve available services, I added a little helper script called 'listServices.js'

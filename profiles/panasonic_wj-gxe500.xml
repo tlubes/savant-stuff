@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="racepoint_component_profile.xsd" manufacturer="Panasonic" model="WJ-GXE500" device_class="Security_camera_ptz" minimum_component_engine_version="0" rpm_xml_version="1.5" minimum_compatible_xml_version="1.1">
+    <notes>
+        To realize services with this device hook up the input to a video
+        source (like the Generic video source).  The profile requires the input
+        to be connected to something.
+        This profile assumes VGA resolution. If you are using QVGA adjust the PTZ parameters accordingly.
+    </notes>
+    <control_interfaces preferred="ip">
+        <ip port="80" response_time_length_ms="12000" name_on_component="ETHERNET" protocol="http"></ip>
+    </control_interfaces>
+    <media_interfaces>
+        <input name_on_component="Video 1">
+            <video_media type="composite_bnc"></video_media>
+            <resource resource_type="ENV_SECURITYCAMERA_SOURCE"></resource>
+        </input>
+        <input name_on_component="Video 2">
+            <video_media type="composite_bnc"></video_media>
+            <resource resource_type="ENV_SECURITYCAMERA_SOURCE"></resource>
+        </input>
+        <input name_on_component="Video 3">
+            <video_media type="composite_bnc"></video_media>
+            <resource resource_type="ENV_SECURITYCAMERA_SOURCE"></resource>
+        </input>
+        <input name_on_component="Video 4">
+            <video_media type="composite_bnc"></video_media>
+            <resource resource_type="ENV_SECURITYCAMERA_SOURCE"></resource>
+        </input>
+        <data name_on_component="NET">
+            <combined_media>
+                <data_media type="ethernet"></data_media>
+                <control port="80"></control>
+            </combined_media>
+        </data>
+    </media_interfaces>
+    <logical_component logical_component_name="Security_camera_1">
+        <implementation>
+            <input name_on_component="Video 1"></input>
+            <data name_on_component="NET"></data>
+        </implementation>
+        <image_access>
+            <image_format format="mjpg" resolution="default">/cgi-bin/mjpeg?stream=1&amp;ch=1&amp;resolution=640</image_format>
+        </image_access>
+        <resource_component_actions resource_type="ENV_SECURITYCAMERA_SOURCE">
+            <action name="PanLeft">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=150&amp;center_y=240&amp;resolution=640&amp;ch=1</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="PanRight">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=480&amp;center_y=240&amp;resolution=640&amp;ch=1</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltUp">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=120&amp;resolution=640&amp;ch=1</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltDown">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=360&amp;resolution=640&amp;ch=1</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="ZoomIn">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=up&amp;ch=1</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="ZoomOut">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=down&amp;ch=1</command_string>
+                    </command>
+                </command_interface>
+            </action>
+        </resource_component_actions>
+    </logical_component>
+    <logical_component logical_component_name="Security_camera_2">
+        <implementation>
+            <input name_on_component="Video 2"></input>
+            <data name_on_component="NET"></data>
+        </implementation>
+        <image_access>
+            <image_format format="mjpg" resolution="default">/cgi-bin/mjpeg?stream=1&amp;ch=2&amp;resolution=640</image_format>
+        </image_access>
+        <resource_component_actions resource_type="ENV_SECURITYCAMERA_SOURCE">
+            <action name="PanLeft">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=150&amp;center_y=240&amp;resolution=640&amp;ch=2</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="PanRight">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=480&amp;center_y=240&amp;resolution=640&amp;ch=2</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltUp">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=120&amp;resolution=640&amp;ch=2</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltDown">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=360&amp;resolution=640&amp;ch=2</command_string>
+                    </command>
+                </command_interface>
+            </action>
+                      <action name="ZoomIn">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=up&amp;ch=2</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="ZoomOut">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=down&amp;ch=2</command_string>
+                    </command>
+                </command_interface>
+            </action>
+        </resource_component_actions>
+    </logical_component>
+    <logical_component logical_component_name="Security_camera_3">
+        <implementation>
+            <input name_on_component="Video 3"></input>
+            <data name_on_component="NET"></data>
+        </implementation>
+        <image_access>
+            <image_format format="mjpg" resolution="default">/cgi-bin/mjpeg?stream=1&amp;ch=3&amp;resolution=640</image_format>
+        </image_access>
+        <resource_component_actions resource_type="ENV_SECURITYCAMERA_SOURCE">
+            <action name="PanLeft">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=150&amp;center_y=240&amp;resolution=640&amp;ch=3</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="PanRight">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=480&amp;center_y=240&amp;resolution=640&amp;ch=3</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltUp">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=120&amp;resolution=640&amp;ch=3</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltDown">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=360&amp;resolution=640&amp;ch=3</command_string>
+                    </command>
+                </command_interface>
+            </action>
+                      <action name="ZoomIn">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=up&amp;ch=3</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="ZoomOut">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=down&amp;ch=3</command_string>
+                    </command>
+                </command_interface>
+            </action>
+        </resource_component_actions>
+    </logical_component>
+    <logical_component logical_component_name="Security_camera_4">
+        <implementation>
+            <input name_on_component="Video 4"></input>
+            <data name_on_component="NET"></data>
+        </implementation>
+        <image_access>
+            <image_format format="mjpg" resolution="default">/cgi-bin/mjpeg?stream=1&amp;ch=4&amp;resolution=640</image_format>
+        </image_access>
+        <resource_component_actions resource_type="ENV_SECURITYCAMERA_SOURCE">
+            <action name="PanLeft">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=150&amp;center_y=240&amp;resolution=640&amp;ch=4</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="PanRight">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=480&amp;center_y=240&amp;resolution=640&amp;ch=4</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltUp">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=120&amp;resolution=640&amp;ch=4</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="TiltDown">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?center_x=320&amp;center_y=360&amp;resolution=640&amp;ch=4</command_string>
+                    </command>
+                </command_interface>
+            </action>
+                      <action name="ZoomIn">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=up&amp;ch=4</command_string>
+                    </command>
+                </command_interface>
+            </action>
+            <action name="ZoomOut">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">/cgi-bin/camctrl?times=down&amp;ch=4</command_string>
+                    </command>
+                </command_interface>
+            </action>
+        </resource_component_actions>
+    </logical_component>
+</component>

@@ -1,0 +1,60 @@
+// just some examples and explanations
+
+
+[{
+		// button cycle example
+		"key": "b_38_6",		// every object in the array needs a unique key
+		"room": "Room Name Here", //enter the room name here
+		"mode": "xm cycle",		// mode in the switch case that is going to be accessed
+		"keypad": 38,		// from integration report
+		"button": 6,		// from integration report
+		"action": "Press" // this is the action that is performed on the lutron keypad, please observe system states to see available actions per button
+	},
+	{
+		// room av off example
+		"key": "b_38_7",
+		"room": "Room Name Here", //enter the room name here
+		"mode": "off",
+		"keypad": 38,
+		"button": 7,
+		"action": "MultiTap" // watch out, multitap has to be enabled in lutron software for example
+	},
+	{
+		// fixed service example
+		"key": "b_377_8",
+		"room": "Room Name Here", //enter the room name here
+		"mode": "music fixed",
+		"keypad": 377,
+		"button": 8,
+		"action": "Press",
+		"fixed": "C"	// fixed music stream
+	},
+	{
+		// activate scene example
+		"key": "b_368_6",
+		"room": "Global",
+		"mode": "scene",
+		"keypad": 368,
+		"button": 6,
+		"action": "Press",
+		"scene": "'Whole House Off' 'D013CA8A-BD69-4140-83A8-54DFC5E90EBB' '__default__'" // contains scene name, uuid and email
+	},
+	{
+		// vol up example
+		"key": "b_379_25",
+		"room": "Room Name Here", //enter the room name here
+		"mode": "vol up",		// when holding, this keeps incrementing the vol
+		"keypad": 379,
+		"button": 25,
+		"action": "Press"
+	},
+	{
+		// vol up example
+		"key": "b_379_24",
+		"room": "Room Name Here", //enter the room name here
+		"mode": "vol dn",		// when holding, this keeps decrementing the vol
+		"keypad": 379,
+		"button": 24,
+		"action": "Press"
+	}
+]

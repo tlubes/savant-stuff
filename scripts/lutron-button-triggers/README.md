@@ -52,10 +52,19 @@ After moving the files over, navigate into their directory and execute the follo
 
 ## Usage
 
-When inside the directory, you can run the scripts by just typing the following commands as an example.
+### Running scripts on the Savant Pro Hosts
 
-    /data/RPM/.nvm/versions/node/v14.15.5/bin/node createTriggers.js (Smart Host)
-    /usr/local/bin/node createTriggers.js (Pro Host)
+Navigate into the directory of the scripts and enter this command for example
+
+    /usr/local/bin/node createTriggers.js
+
+### Running scripts on the Savant Smart Hosts
+
+Navigate into the directory of the scripts and enter this command for example
+
+    /data/RPM/.nvm/versions/node/v14.15.5/bin/node createTriggers.js
+
+### General Information
 
 The scripts that are executable are
 

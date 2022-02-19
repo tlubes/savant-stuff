@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="racepoint_component_profile.xsd" manufacturer="Rotel" model="RA-985BX" device_class="Receiver" minimum_component_engine_version="0" rpm_xml_version="1.1">
+    <notes>
+		====================== Change Log ==================
+        Version 1.1 Change: Fixed PowerOn IR Code
+	</notes>
+    <control_interfaces preferred="rs232">
+        <ir ir_command_format_type="racepointmedia" />
+    </control_interfaces>
+    <media_interfaces>
+        <input name_on_component="CD">
+            <audio_media type="rca_stereo" />
+            <resource resource_type="AV_AUDIOSWITCH_FUNCTION" />
+        </input>
+        <input name_on_component="TUNER">
+            <audio_media type="rca_stereo" />
+            <resource resource_type="AV_AUDIOSWITCH_FUNCTION" />
+        </input>
+        <input name_on_component="AUX1">
+            <audio_media type="rca_stereo" />
+            <resource resource_type="AV_AUDIOSWITCH_FUNCTION" />
+        </input>
+        <input name_on_component="AUX2">
+            <audio_media type="rca_stereo" />
+            <resource resource_type="AV_AUDIOSWITCH_FUNCTION" />
+        </input>
+        <output name_on_component="SPEAKER A">
+            <audio_media type="speakers_stereo"></audio_media>
+            <resource resource_type="AV_VOLUMECONTROL_FUNCTION"></resource>
+            <resource resource_type="AV_AMPLIFIER_FUNCTION"></resource>
+        </output>
+        <output name_on_component="SPEAKER B">
+            <audio_media type="speakers_stereo"></audio_media>
+            <resource resource_type="AV_VOLUMECONTROL_FUNCTION"></resource>
+            <resource resource_type="AV_AMPLIFIER_FUNCTION"></resource>
+        </output>
+    </media_interfaces>
+    <state_variable_list>
+        <state_variable name="Power_current_power_Amplifier" state_center_binding="CurrentPowerStatus" state_center_type="string" owning_logical_component="Amplifier">OFF</state_variable>
+        <state_variable name="Mute_current_mute_Amplifier" state_center_binding="CurrentMuteStatus" state_center_type="string" owning_logical_component="Amplifier">OFF</state_variable>
+        <volume_state_variable name="Volume_current_volume_Amplifier" state_center_binding="CurrentVolume" state_center_type="integer" owning_logical_component="Amplifier" granularity="1" min_value="1" max_value="96">1</volume_state_variable>
+    </state_variable_list>
+    <logical_component logical_component_name="Amplifier">
+        <implementation>
+            <input name_on_component="CD">
+                <action_to_select name="SelectInputCD"></action_to_select>
+            </input>
+            <output name_on_component="SPEAKER A"></output>
+            <output name_on_component="SPEAKER B"></output>
+        </implementation>
+        <implementation>
+            <input name_on_component="TUNER">
+                <action_to_select name="SelectInputTUNER"></action_to_select>
+            </input>
+            <output name_on_component="SPEAKER A"></output>
+            <output name_on_component="SPEAKER B"></output>
+        </implementation>
+        <implementation>
+            <input name_on_component="AUX 1">
+                <action_to_select name="SelectInputAUX 1"></action_to_select>
+            </input>
+            <output name_on_component="SPEAKER A"></output>
+            <output name_on_component="SPEAKER B"></output>
+        </implementation>
+        <implementation>
+            <input name_on_component="AUX 2">
+                <action_to_select name="SelectInputAUX 2"></action_to_select>
+            </input>
+            <output name_on_component="SPEAKER A"></output>
+            <output name_on_component="SPEAKER B"></output>
+        </implementation>
+        <universal_component_actions>
+            <action name="PowerOff">
+                <execute_on_state_variable_condition name="Power_current_power_Amplifier" test_condition="not_equal">OFF</execute_on_state_variable_condition>
+                <update_state_variable name="Power_current_power_Amplifier" update_type="set" update_source="constant">OFF</update_state_variable>
+                <update_state_variable name="Mute_current_mute_Amplifier" update_type="set" update_source="constant">OFF</update_state_variable>
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A70014003D0014003D00130015001300150013001500130015001300150014003D0014003D0013001500130015001300150014003D00130015001300150013001500130015001300150013001500130015001300150013001500130015001300150014003D0014003D0014003D0014003D0014003D0014003D0014003D0014003D001302E100000000</command_string>
+                        <delay ms_delay="3000" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="PowerOn">
+                <execute_on_state_variable_condition name="Power_current_power_Amplifier" test_condition="not_equal">ON</execute_on_state_variable_condition>
+                <update_state_variable name="Power_current_power_Amplifier" update_type="set" update_source="constant">ON</update_state_variable>
+                <update_state_variable name="Mute_current_mute_Amplifier" update_type="set" update_source="constant">OFF</update_state_variable>
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A70014003D0014003D00130015001300150013001500130015001300150014003D0014003D0013001500130015001300150014003D00130015001300150013001500130015001300150013001500130015001300150013001500130015001300150014003D0014003D0014003D0014003D0014003D0014003D0014003D0014003D001302E100000000</command_string>
+                        <delay ms_delay="3000" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="PowerToggle">
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A70014003D0014003D00130015001300150013001500130015001300150014003D0014003D0013001500130015001300150014003D00130015001300150013001500130015001300150013001500130015001300150013001500130015001300150014003D0014003D0014003D0014003D0014003D0014003D0014003D0014003D001302E100000000</command_string>
+                        <delay ms_delay="3000" />
+                    </command>
+                </command_interface>
+            </action>
+        </universal_component_actions>
+        <resource_component_actions resource_type="AV_VOLUMECONTROL_FUNCTION">
+            <action name="IncreaseVolume">
+                <update_state_variable name="Mute_current_mute_Amplifier" update_type="set" update_source="constant">OFF</update_state_variable>
+                <update_volume_variables name="Volume_current_volume_Amplifier" update_type="increment" update_source="constant">1</update_volume_variables>
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A50014003E0014003E00130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E001300150013001500130015001300150014003E0014003E001300150014003E0013001500130015001300150014003E00130015001300150014003E001300150014003E0014003E0014003E001302DF00000000</command_string>
+                        <delay ms_delay="200" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="DecreaseVolume">
+                <update_state_variable name="Mute_current_mute_Amplifier" update_type="set" update_source="constant">OFF</update_state_variable>
+                <update_volume_variables name="Volume_current_volume_Amplifier" update_type="decrement" update_source="constant">1</update_volume_variables>
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A70014003D0014003D00130015001300150013001500130015001300150014003D0014003D0013001500130015001300150014003D0013001500130015001300150014003D0014003D0014003D001300150014003D0013001500130015001300150013001500130015001300150014003D001300150014003D0014003D0014003D001302E100000000</command_string>
+                        <delay ms_delay="200" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="MuteOn">
+                <execute_on_state_variable_condition name="Mute_current_mute_Amplifier" test_condition="not_equal">ON</execute_on_state_variable_condition>
+                <update_state_variable name="Mute_current_mute_Amplifier" update_type="set" update_source="constant">ON</update_state_variable>
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A50014003E0014003E00130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E0013001500130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E0014003E0014003E00130015001300150014003E0014003E0014003E001302DF00000000</command_string>
+                        <delay ms_delay="200" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="MuteOff">
+                <execute_on_state_variable_condition name="Mute_current_mute_Amplifier" test_condition="not_equal">OFF</execute_on_state_variable_condition>
+                <update_state_variable name="Mute_current_mute_Amplifier" update_type="set" update_source="constant">OFF</update_state_variable>
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A50014003E0014003E00130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E0013001500130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E0014003E0014003E00130015001300150014003E0014003E0014003E001302DF00000000</command_string>
+                        <delay ms_delay="200" />
+                    </command>
+                </command_interface>
+            </action>
+        </resource_component_actions>
+        <custom_component_actions>
+            <action name="SelectInputCD">
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A60014003D0014003D00130015001300150013001500130015001300150014003D0014003D0013001500130015001300150014003D0013001500130015001300150014003D00130015001300150013001500130015001300150013001500130015001300150014003D0014003D0014003D0014003D0014003D0014003D0014003D001302DF00000000</command_string>
+                        <delay ms_delay="500" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="SelectInputTUNER">
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A60014003E0014003E00130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E001300150013001500130015001300150014003E0013001500130015001300150013001500130015001300150014003E001300150014003E0014003E0014003E0014003E0014003E0014003E001302E100000000</command_string>
+                        <delay ms_delay="500" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="SelectInputAUX 1">
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A70014003E0014003E00130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E0013001500130015001300150014003E0014003E00130015001300150013001500130015001300150013001500130015001300150014003E0014003E0014003E0014003E0014003E0014003E001302E100000000</command_string>
+                        <delay ms_delay="500" />
+                    </command>
+                </command_interface>
+            </action>
+            <action name="SelectInputAUX 2">
+                <command_interface interface="ir">
+                    <command response_required="no">
+                        <command_string type="hex">0000000000009088014700A60014003E0014003E00130015001300150013001500130015001300150014003E0014003E0013001500130015001300150014003E00130015001300150013001500130015001300150014003E00130015001300150013001500130015001300150014003E0014003E001300150014003E0014003E0014003E0014003E0014003E001302DF00000000</command_string>
+                        <delay ms_delay="500" />
+                    </command>
+                </command_interface>
+            </action>
+        </custom_component_actions>
+    </logical_component>
+</component>

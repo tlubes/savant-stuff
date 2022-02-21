@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="racepoint_component_profile.xsd" manufacturer="Rotel" model="RA-985BX" device_class="Receiver" minimum_component_engine_version="0" rpm_xml_version="1.1">
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="racepoint_component_profile.xsd" manufacturer="Rotel" model="RA-985BX" device_class="Receiver" minimum_component_engine_version="0" rpm_xml_version="1.2">
     <notes>
 		====================== Change Log ==================
         Version 1.1 Change: Fixed PowerOn IR Code
+        Version 1.2 Change: Changed preferred control interface from rs232 to ir
 	</notes>
-    <control_interfaces preferred="rs232">
+    <control_interfaces preferred="ir">
         <ir ir_command_format_type="racepointmedia" />
     </control_interfaces>
     <media_interfaces>
